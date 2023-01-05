@@ -5,7 +5,11 @@ var questionContainerElement = document.getElementById("quiz");
 var questionElement = document.getElementById("questions");
 var answerButtonsElement = document.getElementById("answer-btns")
 var timerElement = document.getElementById("count-down")
+var initialsEl = document.getElementById("card")
+var initialsInput = document.getElementById("initials-text")
+var submitForm = document.getElementById("initials")
 
+var score;
 var timer;
 var timerCount;
 
@@ -69,7 +73,7 @@ function startQuiz(){
     console.log("Quiz started")
     introElement.classList.add("hide");
     questionContainerElement.classList.remove('hide')
-    timerCount = 30;
+    timerCount = 1;
     startTimer()
 }
 
@@ -86,12 +90,55 @@ function startTimer(){
         else{
             // clears interval
             clearInterval(timer);
+            storeInitials();
         }
     }, 1000);
 }
 
+// function that prompts user's initials
+function storeInitials(){
+    questionContainerElement.classList.add('hide')
+    initialsEl.classList.remove('hide')
 
+    var playerScores = {
+        initials: initialsInput.value.trim(),
+        score: score
+    }
+    localStorage.setItem("initials", JSON.stringify(playerScores))
+}
 
+// A function that show last score
+
+function renderScore(){
+    var highscore = document.getElementById("highscore");
+    initialsEl.classList.add('hide');
+    highscore.classList.remove('hide');
+    var lastScore = JSON.parse(localStorage.getItem("playerScores"));
+
+    // check if data is returned, if not exit out of the function
+    // If data is returned from storage, render the data to the page using innerHTML
+    if (lastScore !== null){
+        document.getElementById("saved-initials-scores").innerHTML= playerScores.initials;
+        document.getElementById("saved-initials-scores").innerHTML=playerScores.score;
+    }
+}
+
+// Add submit event to form
+
+submitForm.addEventListener('submit', function(event){
+    event.preventDefault();
+
+    // var initialsText = initialsInput.value.trim()
+
+    // // Return from function if submitted initialsText is blank
+    // if (initialsText === ""){
+    //     return;
+    // }
+
+    // store initials in localStorage
+    storeInitials();
+    renderScore();
+})
 
 
 

@@ -34,8 +34,20 @@
                 </div>
 
             </div>
-            <div class="controls">
-                <button id="next-btn" class="next-btn btn hide">Next</button>
+            <div id="card" class="hide">
+                <h1>All done!</h1>
+                <p>Your final score is</p>
+                <form id="initials" method="POST">
+                    <label for="initials-text">Enter your initials</label>
+                    <input type="text" name="initials-text" id="initials-text" placeholder="your initials">
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+            <div id="highscore" class="hide">
+                <h2>High Score</h2>
+                <p id="saved-initials-scores">Something</p>
+                <button id="go-back" class="last-btn">Go Back</button>
+                <button id="reset" class="last-btn">Clear highscore</button>
             </div>
         </div>
     </div>
