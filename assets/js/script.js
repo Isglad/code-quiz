@@ -69,7 +69,7 @@ function startQuiz(){
     console.log("Quiz started")
     introElement.classList.add("hide");
     questionContainerElement.classList.remove('hide')
-    timerCount = 10;
+    timerCount = 30;
     startTimer()
 }
 
@@ -77,11 +77,10 @@ function startTimer(){
     console.log("Timer starts")
     timer = setInterval(function(){
         
-        timerElement.textContent = "Time remaining " + timerCount;
+        timerElement.textContent = timerCount;
         timerCount--;
         if (timerCount >= 0) {
             console.log("counting down")
-            // clearInterval(timer);
         }
         //Test if time has run out
         else{

@@ -83,11 +83,11 @@ img{
     color: #0d92a6e7;
 }
 
-.quiz-header{
+/* .quiz-header{
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
+} */
 
 /* .quiz-header #progress{
     color: #2b2b2b;
@@ -103,12 +103,13 @@ img{
     margin: 1px;
     color: #fff;
     border-radius: 5px;
-    height: 200px;
-    text-align: left;
+    height: 100px;
+    text-align: center;
+    width: 30%;
 }
 
 .quiz-box #quiz #questions{
-    padding: 20px 0;
+    padding: 120px 0px 80px 0;
 }
 
 .quiz-box #question{
