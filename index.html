@@ -20,25 +20,22 @@
             <div id="quiz" class="hide">
                 <!-- display number of the current question and time left -->
                 <div class="quiz-header">
-                    <p id="progress">Question x of y</p>
+                    <!-- <p id="progress">Question x of y</p> -->
                     <p id="count-down">Time</p>
                 </div>
                 <p id="questions">Question</p>
 
                 <!--list of questions-->
-                <div class="buttons">
+                <div class="buttons" id="answer-btns">
                     <button class="btn" id="btn0">A.</button>
                     <button class="btn" id="btn1">B.</button>
                     <button class="btn" id="btn2">C.</button>
                     <button class="btn" id="btn3">D.</button>
                 </div>
 
-                <hr>
-                <!--display correct or wrong according to the selected answer-->
-                <footer>
-                    <p class="correct hide">Correct!</p>
-                    <p class="wrong hide">Wrong!</p>
-                </footer>
+            </div>
+            <div class="controls">
+                <button id="next-btn" class="next-btn btn hide">Next</button>
             </div>
         </div>
     </div>

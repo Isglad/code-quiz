@@ -12,7 +12,7 @@
 
 ## Description 
 
-[Visit the Deployed Site](-------)
+[Visit the Deployed Site](https://isglad.github.io/code-quiz/)
 
 Welcome to the coding quiz challenge!
 This quiz is designed to test your JavaScript basic coding knowledge and skills. The quiz is suitable for beginner programmers.
