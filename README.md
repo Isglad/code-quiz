@@ -18,8 +18,6 @@ Welcome to the coding quiz challenge!
 This quiz is designed to test your JavaScript basic coding knowledge and skills. The quiz is suitable for beginner programmers.
 The quiz keeps track of your score and displays it on the screen once you have answered to all questions and submit your initials so that you can gauge your progress compared to your peers.
 
-![Site Langing Page](...)
-
 ## Table of Contents
 
 * [Usage](#usage)
@@ -30,7 +28,7 @@ The quiz keeps track of your score and displays it on the screen once you have a
 
 ## Usage
 
-To take the quiz , simply open the link in your web browser and press the start button, the timer starts and you are presented with a question. Each question has multiple choice answers for you to select the correct one. Once you select an answer, you are presented with a next question. When all questions are answered or the timer reaches 0, the quiz is over. When the quiz is over, you can save your initials and your score.
+To take the quiz , simply open the link in your web browser and press the start button, the timer starts and you are presented with a question. Each question has multiple choice answers for you to select the correct one. Once you select an answer, you are presented with a next question. If the wrong answe is selected, time is deductable from the clock. When all questions are answered or the timer reaches 0, the quiz is over. When the quiz is over, you are presented with your final score and prompted to save your initials.
 
 ## Learning Points
 
