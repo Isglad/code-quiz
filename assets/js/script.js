@@ -134,12 +134,13 @@ function storeInitials(){
     initialsEl.classList.remove('hide')
     // I want the score to be equal to the current timerCount
     score = timerCount;
+    console.log("Your current score is " + score)
     // I want to concatenate the finalScore variable with current score
-    // finalScore.textContent = "Your final score is " + score;
+    finalScore.innerHTML = "Your final score is " + score;
     // I want to create a variable that stores player's initials and score
     var playerScores = {
         initials: initialsInput.value.trim(),
-        "score": score 
+        score: score 
     }
     localStorage.setItem("initials", JSON.stringify(playerScores))
 }
@@ -154,8 +155,8 @@ function renderScore(){
     // check if data is returned, if not exit out of the function
     // If data is returned from storage, render the data to the page using innerHTML
     if (lastScore !== null){
-        document.getElementById("saved-initials").innerHTML= lastScore.initials;
-        document.getElementById("saved-scores").innerHTML= lastScore.score;
+        document.getElementById("saved-initials").innerHTML= lastScore.initials + " " + lastScore.score;
+        // document.getElementById("saved-scores").innerHTML= lastScore.score;
     } else {
         return;
     }
