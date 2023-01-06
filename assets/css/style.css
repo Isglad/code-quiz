@@ -190,6 +190,10 @@ input[type=submit]{
     font-size: 20px;
 }
 
+#highscore{
+    text-align: center;
+}
+
 #highscore h2{
     font-size: 40px;
     padding-top: 80px;
