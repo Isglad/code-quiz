@@ -112,15 +112,17 @@ function startTimer(){
         
         timerElement.textContent = timerCount;
         timerCount--;
-        if (timerCount >= 0) {
+        if (timerCount <= 0 || currentQuestionIndex == 4) {
             console.log("counting down")
-        }
-        //Test if time has run out
-        else{
-            // clears interval
             clearInterval(timer);
             storeInitials();
         }
+        //Test if time has run out
+        // else{
+        //     // clears interval
+        //     clearInterval(timer);
+        //     storeInitials();
+        // }
     }, 1000);
 }
 
@@ -248,6 +250,9 @@ function showQuestion(question){
         button.addEventListener('click', selectAnswer)
         answerButtonsElement.appendChild(button)
     })
+    // if (shuffledQuestions.length < currentQuestionIndex){
+    //     storeInitials()
+    // }
 
 }
 
@@ -285,12 +290,13 @@ function selectAnswer(e){
         questionContainerElement.appendChild(h2)
         // h2.textContent=""
         // selectedBtn.addEventListener('click', function() {
-            // h2.textContent=""
-            currentQuestionIndex++;
-            questionContainerElement.removeChild(h2)
-            // h2.textContent=""
-            setNextQuestion();
-            // h2.textContent=""
+        // h2.textContent=""
+        currentQuestionIndex++;
+        // if(currentQuestionIndex == 4)
+        //     storeInitials();
+        // h2.textContent=""
+        setNextQuestion();
+        // h2.textContent=""
         // })
          
     } // if the selected answer is wrong, display 'wrong' to screen and go to next question
@@ -301,10 +307,12 @@ function selectAnswer(e){
         // h2.textContent=""
         // selectedBtn.addEventListener('click', function() {
             
-            currentQuestionIndex++;
-            // h2.textContent=""
-            setNextQuestion();
-            // h2.textContent=""
+        currentQuestionIndex++;
+        // if(currentQuestionIndex == 4)
+        //     storeInitials();
+        // h2.textContent=""
+        setNextQuestion();
+        // h2.textContent=""
         // })
     }
 
