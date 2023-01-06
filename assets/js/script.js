@@ -275,17 +275,19 @@ function selectAnswer(e){
     //     startButton.innerText = 'Restart'
     //     startButton.classList.remove('hide')
     // }
-    // check if the selected answer is correct and display 'correct' to screen
+    // check if the selected answer is correct and display 'correct' to screen and go to next question
     if (correct){
         var h2 = document.createElement("h2");
         h2.textContent = "Correct!"
         questionContainerElement.appendChild(h2)
+        setNextQuestion();
     }
-    // if the selected answer is wrong, display 'wong' to screen
+    // if the selected answer is wrong, display 'wong' to screen and go to next question
     else{
         var h2 = document.createElement("h2");
         h2.textContent = "Wrong!";
         questionContainerElement.appendChild(h2)
+        setNextQuestion();
     }
 }
 
