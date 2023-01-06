@@ -1,5 +1,4 @@
 var startButton = document.getElementById("start-btn");
-var nextButton = document.getElementById("next-btn")
 var introElement = document.getElementById("start");
 var questionContainerElement = document.getElementById("quiz");
 var questionElement = document.getElementById("questions");
@@ -12,6 +11,9 @@ var submitForm = document.getElementById("initials")
 var score;
 var timer;
 var timerCount;
+
+// set variable to store shuffled questions
+var shuffledQuestions, currentQuestionIndex;
 
 // list of questions and their answers
 var questions = [
@@ -66,17 +68,42 @@ var questions = [
     }
 ]
 
+// I want to create a list of all answers.text
+var answersValues = []
+for (var i = 0; i < questions.length; i++){
+    var answers = questions[i]['answers'];
+    for (var j = 0; j < answers.length; j++){
+        answersValues.push(answers[j]['text']);
+    }
+}
+console.log(answersValues)
+
+// I want to create a list of all questions
+var questionsList = [];
+for (var i = 0; i < questions.length; i++){
+    questionsList.push(questions[i].question)
+}
+console.log(questionsList)
+
+// I want the Start button to listen to click and call startQuiz function
 startButton.addEventListener("click", startQuiz)
 
 // the startGame is called when the start button is clicked
 function startQuiz(){
     console.log("Quiz started")
+    // I want to hide the Start Quiz page after clicking on start button
     introElement.classList.add("hide");
+    // I want to show/display the questions page and start timer after clicking the start button.
     questionContainerElement.classList.remove('hide')
-    timerCount = 1;
+    timerCount = 15;
     startTimer()
+    //I want the questions to not be in the same order
+    shuffledQuestions = questionsList.sort(() => Math.random - .5);
+    currentQuestionIndex = 0;
+    setNextQuestion();
 }
 
+// I want to create a function that start the timer
 function startTimer(){
     console.log("Timer starts")
     timer = setInterval(function(){
@@ -97,29 +124,31 @@ function startTimer(){
 
 // function that prompts user's initials
 function storeInitials(){
+    // When all questions are answered or the time reaches 0, I want to hide the questions page and display the page that prompt user's initials
     questionContainerElement.classList.add('hide')
     initialsEl.classList.remove('hide')
-
+    // I want to create a variable that stores player's initials and score
     var playerScores = {
         initials: initialsInput.value.trim(),
-        score: score
+        "score": 10 
     }
     localStorage.setItem("initials", JSON.stringify(playerScores))
 }
 
 // A function that show last score
-
 function renderScore(){
     var highscore = document.getElementById("highscore");
     initialsEl.classList.add('hide');
     highscore.classList.remove('hide');
-    var lastScore = JSON.parse(localStorage.getItem("playerScores"));
+    var lastScore = JSON.parse(localStorage.getItem("initials"));
 
     // check if data is returned, if not exit out of the function
     // If data is returned from storage, render the data to the page using innerHTML
     if (lastScore !== null){
-        document.getElementById("saved-initials-scores").innerHTML= playerScores.initials;
-        document.getElementById("saved-initials-scores").innerHTML=playerScores.score;
+        document.getElementById("saved-initials").innerHTML= lastScore.initials;
+        document.getElementById("saved-scores").innerHTML= lastScore.score;
+    } else {
+        return;
     }
 }
 
@@ -141,6 +170,21 @@ submitForm.addEventListener('submit', function(event){
 })
 
 
+// I want to add an event listener to 'Go back' button so that player restart the game
+var goBack = document.getElementById("go-back");
+goBack.addEventListener("click", function(){
+    initialsEl.classList.add('hide');
+    highscore.classList.add('hide');
+    introElement.classList.remove("hide");
+})
+
+
+
+// I want to create a function that reset score if player clicks the clear highscore button
+var resetButton = document.getElementById("reset");
+resetButton.addEventListener("click", function(){
+
+})
 
 
 
@@ -148,17 +192,8 @@ submitForm.addEventListener('submit', function(event){
 
 
 
-
-
-
-
-
-// // set variable to store shuffled questions
-// var shuffledQuestions, currentQuestionIndex;
-
-
-// startButton.addEventListener("click", startQuiz)
-// nextButton.addEventListener('click', () => {
+// var nextButton = document.getElementById("next-btn")
+// nextButton.addEventListener('click', function() {
 //     currentQuestionIndex++;
 //     setNextQuestion();
 // })
@@ -189,65 +224,66 @@ submitForm.addEventListener('submit', function(event){
 //     })
 // }
 
-// // function to displays questions
-// function setNextQuestion(){
-//     console.log("Here is the next question")
-//     resetState();
-//     showQuestion(shuffledQuestions[currentQuestionIndex]);
-// }
+// function to displays questions
+function setNextQuestion(){
+    console.log("Here is the next question")
+    resetState();
+    showQuestion(shuffledQuestions[currentQuestionIndex]);
+}
 
-// // function that shows question
-// function showQuestion(question){
-//     console.log("questions start here")
-//     questionElement.innerText = questions.question;
-//     // loop through answers and populate them and create a button for each
-//     question.answers.forEach(answer => {
-//         var button = document.createElement("button")
-//         button.innerText = answer.text
-//         button.classList.add('btn')
-//         if (answer.correct) {
-//             button.dataset.correct = answer.correct
-//         }
-//         button.addEventListener('click', selectAnswer)
-//         answerButtonsElement.appendChild(button)
-//     })
+// function that shows question
+function showQuestion(question){
+    console.log("questions start here")
+    questionElement.innerText = shuffledQuestions[currentQuestionIndex];
+    // loop through answers and populate them and create a button for each
+    // question.answers.forEach(answer => {
+    answersValues.forEach(answer => {
+        var button = document.createElement("button")
+        button.innerText = answer.text
+        button.classList.add('btn')
+        if (answer.correct) {
+            button.dataset.correct = answer.correct
+        }
+        button.addEventListener('click', selectAnswer)
+        answerButtonsElement.appendChild(button)
+    })
 
-// }
+}
 
-// function resetState(){
-//     clearStatusClass(document.body)
-//     nextButton.classList.add('hide')
-//     while (answerButtonsElement.firstChild){
-//         answerButtonsElement.removeChild(answerButtonsElement.firstChild)
-//     }
-// }
+function resetState(){
+    clearStatusClass(document.body)
+    // nextButton.classList.add('hide')
+    while (answerButtonsElement.firstChild){
+        answerButtonsElement.removeChild(answerButtonsElement.firstChild)
+    }
+}
 
-// // function that populates answer
-// function selectAnswer(e){
-//     var selectedBtn = e.target
-//     var correct = selectedBtn.dataset.correct
-//     setStatusClass(document.body, correct)
-//     Array.from(answerButtonsElement.children).forEach(button => {
-//         setStatusClass(button, button.dataset.correct)
-//     })
-//     if (shuffledQuestions.length > currentQuestionIndex +1){
-//         nextButton.classList.remove('hide')
-//     }else{
-//         startButton.innerText = 'Restart'
-//         startButton.classList.remove('hide')
-//     }
-// }
+// function that populates answer
+function selectAnswer(e){
+    var selectedBtn = e.target
+    var correct = selectedBtn.dataset.correct
+    setStatusClass(document.body, correct)
+    Array.from(answerButtonsElement.children).forEach(button => {
+        setStatusClass(button, button.dataset.correct)
+    })
+    if (shuffledQuestions.length > currentQuestionIndex +1){
+        // nextButton.classList.remove('hide')
+    }else{
+        startButton.innerText = 'Restart'
+        startButton.classList.remove('hide')
+    }
+}
 
-// function setStatusClass(element, correct){
-//     clearStatusClass(element)
-//     if (correct) {
-//         element.classList.add('correct')
-//     }else{
-//         element.classList.add('wrong')
-//     }
-// }
+function setStatusClass(element, correct){
+    clearStatusClass(element)
+    if (correct) {
+        element.classList.add('correct')
+    }else{
+        element.classList.add('wrong')
+    }
+}
 
-// function clearStatusClass(element){
-//     element.classList.remove('correct')
-//     element.classList.remove('wrong')
-// }
+function clearStatusClass(element){
+    element.classList.remove('correct')
+    element.classList.remove('wrong')
+}
