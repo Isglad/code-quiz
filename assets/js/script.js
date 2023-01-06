@@ -8,7 +8,9 @@ var initialsEl = document.getElementById("card")
 var initialsInput = document.getElementById("initials-text")
 var submitForm = document.getElementById("initials")
 
-var score;
+
+
+var score = 20;
 var timer;
 var timerCount;
 
@@ -95,7 +97,7 @@ function startQuiz(){
     introElement.classList.add("hide");
     // I want to show/display the questions page and start timer after clicking the start button.
     questionContainerElement.classList.remove('hide')
-    timerCount = 15;
+    timerCount = 20;
     startTimer()
     //I want the questions to not be in the same order
     shuffledQuestions = questionsList.sort(() => Math.random - .5);
@@ -130,7 +132,7 @@ function storeInitials(){
     // I want to create a variable that stores player's initials and score
     var playerScores = {
         initials: initialsInput.value.trim(),
-        "score": 10 
+        "score": score 
     }
     localStorage.setItem("initials", JSON.stringify(playerScores))
 }
@@ -233,7 +235,6 @@ function setNextQuestion(){
 
 // function that shows question
 function showQuestion(question){
-    console.log("questions start here")
     questionElement.innerText = shuffledQuestions[currentQuestionIndex];
     // loop through answers and populate them and create a button for each
     questions[currentQuestionIndex].answers.forEach(answer => {
@@ -250,9 +251,11 @@ function showQuestion(question){
 
 }
 
+// var h2 = document.createElement("h2");
+
 function resetState(){
-    // clearStatusClass(document.body)
-    // nextButton.classList.add('hide')
+    // clearStatusClass(questionContainerElement)
+    // selectAnswer.classList.add('hide')
     while (answerButtonsElement.firstChild){
         answerButtonsElement.removeChild(answerButtonsElement.firstChild)
     }
@@ -280,16 +283,36 @@ function selectAnswer(e){
         var h2 = document.createElement("h2");
         h2.textContent = "Correct!"
         questionContainerElement.appendChild(h2)
-        setNextQuestion();
+        selectedBtn.addEventListener('click', function() {
+            currentQuestionIndex++;
+            setNextQuestion();
+        })
+        // nextQuestion();    
     }
     // if the selected answer is wrong, display 'wong' to screen and go to next question
     else{
         var h2 = document.createElement("h2");
         h2.textContent = "Wrong!";
         questionContainerElement.appendChild(h2)
-        setNextQuestion();
+        selectedBtn.addEventListener('click', function() {
+            currentQuestionIndex++;
+            setNextQuestion();
+        })
     }
 }
+
+// I want to go to the next question once an answer is selected
+// function nextQuestion(e){
+//     h2.classList.add('hide')
+//     var selectedAnswer = e.target
+//     // if there are still questions available, go to next question
+//     if (shuffledQuestions.length > currentQuestionIndex +1){
+//         selectedAnswer.addEventListener('click', function() {
+//             currentQuestionIndex++;
+//             setNextQuestion();
+//         })
+//     }
+// }
 
 // I want to append 'correct' or 'wrong' on screen
 function setStatusClass(element, correct){
