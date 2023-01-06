@@ -138,15 +138,8 @@ img{
     outline: none;
 }
 
-.correct {
-    background-color: green;
-    color: White;
-    font-size: 30px;
-}
-
-.wrong {
-    background-color: red;
-    color: white;
+#quiz h2 {
+    /* background-color: green; */
     font-size: 30px;
 }
 

@@ -251,34 +251,47 @@ function showQuestion(question){
 }
 
 function resetState(){
-    clearStatusClass(document.body)
+    // clearStatusClass(document.body)
     // nextButton.classList.add('hide')
     while (answerButtonsElement.firstChild){
         answerButtonsElement.removeChild(answerButtonsElement.firstChild)
     }
 }
 
-// function that populates answer
+// I want to show if user is correct when an answer is selected
 function selectAnswer(e){
     console.log("Check wrong or correct answer starts here!")
     var selectedBtn = e.target
     var correct = selectedBtn.dataset.correct
-    setStatusClass(document.body, correct)
-    console.log("check setStatus " + document.body)
-    Array.from(answerButtonsElement.children).forEach(button => {
-        setStatusClass(button, button.dataset.correct)
-        console.log("button check " + button.dataset.correct)
-    })
-    if (shuffledQuestions.length > currentQuestionIndex +1){
-        // nextButton.classList.remove('hide')
-    }else{
-        startButton.innerText = 'Restart'
-        startButton.classList.remove('hide')
+    // setStatusClass(document.body, correct)
+    // console.log("check setStatus " + document.body)
+    // Array.from(answerButtonsElement.children).forEach(button => {
+    //     setStatusClass(button, button.dataset.correct)
+    //     console.log("button check " + button.dataset.correct)
+    // })
+    // if (shuffledQuestions.length > currentQuestionIndex +1){
+    //     // nextButton.classList.remove('hide')
+    // }else{
+    //     startButton.innerText = 'Restart'
+    //     startButton.classList.remove('hide')
+    // }
+    // check if the selected answer is correct and display 'correct' to screen
+    if (correct){
+        var h2 = document.createElement("h2");
+        h2.textContent = "Correct!"
+        questionContainerElement.appendChild(h2)
+    }
+    // if the selected answer is wrong, display 'wong' to screen
+    else{
+        var h2 = document.createElement("h2");
+        h2.textContent = "Wrong!";
+        questionContainerElement.appendChild(h2)
     }
 }
 
+// I want to append 'correct' or 'wrong' on screen
 function setStatusClass(element, correct){
-    clearStatusClass(element)
+    // clearStatusClass(element)
     if (correct) {
         element.classList.add('correct')
         console.log("check element classlist correct")
@@ -288,7 +301,7 @@ function setStatusClass(element, correct){
     }
 }
 
-function clearStatusClass(element){
-    element.classList.remove('correct')
-    element.classList.remove('wrong')
-}
+// function clearStatusClass(element){
+//     element.classList.remove('correct')
+//     element.classList.remove('wrong')
+// }
