@@ -7,6 +7,7 @@ var timerElement = document.getElementById("count-down")
 var initialsEl = document.getElementById("card")
 var initialsInput = document.getElementById("initials-text")
 var submitForm = document.getElementById("initials")
+var finalScore = document.getElementById("final-score")
 
 
 
@@ -131,6 +132,10 @@ function storeInitials(){
     // When all questions are answered or the time reaches 0, I want to hide the questions page and display the page that prompt user's initials
     questionContainerElement.classList.add('hide')
     initialsEl.classList.remove('hide')
+    // I want the score to be equal to the current timerCount
+    score = timerCount;
+    // I want to concatenate the finalScore variable with current score
+    // finalScore.textContent = "Your final score is " + score;
     // I want to create a variable that stores player's initials and score
     var playerScores = {
         initials: initialsInput.value.trim(),
