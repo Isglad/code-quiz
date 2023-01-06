@@ -283,22 +283,58 @@ function selectAnswer(e){
         var h2 = document.createElement("h2");
         h2.textContent = "Correct!"
         questionContainerElement.appendChild(h2)
-        selectedBtn.addEventListener('click', function() {
+        // h2.textContent=""
+        // selectedBtn.addEventListener('click', function() {
+            // h2.textContent=""
             currentQuestionIndex++;
+            questionContainerElement.removeChild(h2)
+            // h2.textContent=""
             setNextQuestion();
-        })
-        // nextQuestion();    
-    }
-    // if the selected answer is wrong, display 'wong' to screen and go to next question
+            // h2.textContent=""
+        // })
+         
+    } // if the selected answer is wrong, display 'wrong' to screen and go to next question
     else{
         var h2 = document.createElement("h2");
         h2.textContent = "Wrong!";
         questionContainerElement.appendChild(h2)
-        selectedBtn.addEventListener('click', function() {
+        // h2.textContent=""
+        // selectedBtn.addEventListener('click', function() {
+            
             currentQuestionIndex++;
+            // h2.textContent=""
             setNextQuestion();
-        })
+            // h2.textContent=""
+        // })
     }
+
+    // // selectedBtn.addEventListener('click', function() {
+    //     if (correct){
+    //         var h2 = document.createElement("h2");
+    //         h2.textContent = "Correct!"
+    //         questionContainerElement.appendChild(h2)
+
+    //         currentQuestionIndex++;
+    //         setNextQuestion();
+    //         // h2.textContent=""
+    //     }
+    //     else{
+    //         var h2 = document.createElement("h2");
+    //         h2.textContent = "Wrong!";
+    //         questionContainerElement.appendChild(h2)
+
+    //         currentQuestionIndex++;
+    //         setNextQuestion();
+    //         // h2.textContent=""
+    //     }
+    //     // h2.textContent=""
+    // // })    
+
+
+    // if (shuffledQuestions.length < currentQuestionIndex +1){
+    //     storeInitials();
+    // }
+    
 }
 
 // I want to go to the next question once an answer is selected
@@ -315,16 +351,16 @@ function selectAnswer(e){
 // }
 
 // I want to append 'correct' or 'wrong' on screen
-function setStatusClass(element, correct){
-    // clearStatusClass(element)
-    if (correct) {
-        element.classList.add('correct')
-        console.log("check element classlist correct")
-    }else{
-        element.classList.add('wrong')
-        console.log("check element classlist wrong")
-    }
-}
+// function setStatusClass(element, correct){
+//     // clearStatusClass(element)
+//     if (correct) {
+//         element.classList.add('correct')
+//         console.log("check element classlist correct")
+//     }else{
+//         element.classList.add('wrong')
+//         console.log("check element classlist wrong")
+//     }
+// }
 
 // function clearStatusClass(element){
 //     element.classList.remove('correct')
