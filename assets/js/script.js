@@ -236,8 +236,8 @@ function showQuestion(question){
     console.log("questions start here")
     questionElement.innerText = shuffledQuestions[currentQuestionIndex];
     // loop through answers and populate them and create a button for each
-    // question.answers.forEach(answer => {
-    answersValues.forEach(answer => {
+    question.answers.forEach(answer => {
+    // answersValues.forEach(answer => {
         var button = document.createElement("button")
         button.innerText = answer.text
         button.classList.add('btn')
