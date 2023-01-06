@@ -98,7 +98,7 @@ function startQuiz(){
     introElement.classList.add("hide");
     // I want to show/display the questions page and start timer after clicking the start button.
     questionContainerElement.classList.remove('hide')
-    timerCount = 20;
+    timerCount = 60;
     startTimer()
     //I want the questions to not be in the same order
     shuffledQuestions = questionsList.sort(() => Math.random - .5);
@@ -304,8 +304,11 @@ function selectAnswer(e){
         // h2.textContent=""
         // })
          
-    } // if the selected answer is wrong, display 'wrong' to screen and go to next question
+    } // if the selected answer is wrong,
     else{
+        // I want to deduct timerCount everytime the wrong answer is selected
+        timerCount -= 10;
+        // I want to display 'wrong' to screen and go to next question
         var h2 = document.createElement("h2");
         h2.textContent = "Wrong!";
         questionContainerElement.appendChild(h2)
