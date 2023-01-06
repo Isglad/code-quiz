@@ -193,7 +193,7 @@ goBack.addEventListener("click", function(){
 // I want to create a function that reset score if player clicks the clear highscore button
 var resetButton = document.getElementById("reset");
 resetButton.addEventListener("click", function(){
-
+    document.getElementById("saved-initials").innerHTML= "0"
 })
 
 
