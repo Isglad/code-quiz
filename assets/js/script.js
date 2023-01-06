@@ -110,20 +110,14 @@ function startQuiz(){
 function startTimer(){
     console.log("Timer starts")
     timer = setInterval(function(){
-        
         timerElement.textContent = timerCount;
         timerCount--;
+        // if time reaches 0 or there is no more questions, I want to clear interval and save my initials
         if (timerCount <= 0 || currentQuestionIndex == 4) {
             console.log("counting down")
             clearInterval(timer);
             storeInitials();
         }
-        //Test if time has run out
-        // else{
-        //     // clears interval
-        //     clearInterval(timer);
-        //     storeInitials();
-        // }
     }, 1000);
 }
 
@@ -156,29 +150,17 @@ function renderScore(){
     // If data is returned from storage, render the data to the page using innerHTML
     if (lastScore !== null){
         document.getElementById("saved-initials").innerHTML= lastScore.initials + " " + lastScore.score;
-        // document.getElementById("saved-scores").innerHTML= lastScore.score;
     } else {
         return;
     }
 }
 
 // Add submit event to form
-
 submitForm.addEventListener('submit', function(event){
     event.preventDefault();
-
-    // var initialsText = initialsInput.value.trim()
-
-    // // Return from function if submitted initialsText is blank
-    // if (initialsText === ""){
-    //     return;
-    // }
-
-    // store initials in localStorage
     storeInitials();
     renderScore();
 })
-
 
 // I want to add an event listener to 'Go back' button so that player restart the game
 var goBack = document.getElementById("go-back");
@@ -186,53 +168,14 @@ goBack.addEventListener("click", function(){
     initialsEl.classList.add('hide');
     highscore.classList.add('hide');
     introElement.classList.remove("hide");
+    
 })
-
-
 
 // I want to create a function that reset score if player clicks the clear highscore button
 var resetButton = document.getElementById("reset");
 resetButton.addEventListener("click", function(){
     document.getElementById("saved-initials").innerHTML= "0"
 })
-
-
-
-
-
-
-
-// var nextButton = document.getElementById("next-btn")
-// nextButton.addEventListener('click', function() {
-//     currentQuestionIndex++;
-//     setNextQuestion();
-// })
-
-// // function to start quiz
-// function startQuiz(){
-//     console.log("Game Started");
-//     // once the start button is clicked, hide the intro page
-//     introElement.classList.add("hide");
-//     shuffledQuestions = questions.sort(() => Math.random - .5);
-//     currentQuestionIndex = 0;
-//     // allow questions to appear
-//     questionContainerElement.classList.remove("hide");
-//     // display questions
-//     setNextQuestion()
-//     startTimer()
-// }
-
-// // function that start the timer
-// function startTimer(){
-//     // Sets Timer
-//     timer = setInterval(function(){
-//         timerCount--;
-//         timerElement.textContent = timerCount;
-//         // if (timerCount >=0){
-
-//         // }
-//     })
-// }
 
 // function to displays questions
 function setNextQuestion(){
@@ -256,17 +199,9 @@ function showQuestion(question){
         button.addEventListener('click', selectAnswer)
         answerButtonsElement.appendChild(button)
     })
-    // if (shuffledQuestions.length < currentQuestionIndex){
-    //     storeInitials()
-    // }
-
 }
 
-// var h2 = document.createElement("h2");
-
 function resetState(){
-    // clearStatusClass(questionContainerElement)
-    // selectAnswer.classList.add('hide')
     while (answerButtonsElement.firstChild){
         answerButtonsElement.removeChild(answerButtonsElement.firstChild)
     }
@@ -277,34 +212,13 @@ function selectAnswer(e){
     console.log("Check wrong or correct answer starts here!")
     var selectedBtn = e.target
     var correct = selectedBtn.dataset.correct
-    // setStatusClass(document.body, correct)
-    // console.log("check setStatus " + document.body)
-    // Array.from(answerButtonsElement.children).forEach(button => {
-    //     setStatusClass(button, button.dataset.correct)
-    //     console.log("button check " + button.dataset.correct)
-    // })
-    // if (shuffledQuestions.length > currentQuestionIndex +1){
-    //     // nextButton.classList.remove('hide')
-    // }else{
-    //     startButton.innerText = 'Restart'
-    //     startButton.classList.remove('hide')
-    // }
     // check if the selected answer is correct and display 'correct' to screen and go to next question
     if (correct){
         var h2 = document.createElement("h2");
         h2.textContent = "Correct!"
         questionContainerElement.appendChild(h2)
-        // h2.textContent=""
-        // selectedBtn.addEventListener('click', function() {
-        // h2.textContent=""
         currentQuestionIndex++;
-        // if(currentQuestionIndex == 4)
-        //     storeInitials();
-        // h2.textContent=""
         setNextQuestion();
-        // h2.textContent=""
-        // })
-         
     } // if the selected answer is wrong,
     else{
         // I want to deduct timerCount everytime the wrong answer is selected
@@ -313,73 +227,7 @@ function selectAnswer(e){
         var h2 = document.createElement("h2");
         h2.textContent = "Wrong!";
         questionContainerElement.appendChild(h2)
-        // h2.textContent=""
-        // selectedBtn.addEventListener('click', function() {
-            
         currentQuestionIndex++;
-        // if(currentQuestionIndex == 4)
-        //     storeInitials();
-        // h2.textContent=""
         setNextQuestion();
-        // h2.textContent=""
-        // })
     }
-
-    // // selectedBtn.addEventListener('click', function() {
-    //     if (correct){
-    //         var h2 = document.createElement("h2");
-    //         h2.textContent = "Correct!"
-    //         questionContainerElement.appendChild(h2)
-
-    //         currentQuestionIndex++;
-    //         setNextQuestion();
-    //         // h2.textContent=""
-    //     }
-    //     else{
-    //         var h2 = document.createElement("h2");
-    //         h2.textContent = "Wrong!";
-    //         questionContainerElement.appendChild(h2)
-
-    //         currentQuestionIndex++;
-    //         setNextQuestion();
-    //         // h2.textContent=""
-    //     }
-    //     // h2.textContent=""
-    // // })    
-
-
-    // if (shuffledQuestions.length < currentQuestionIndex +1){
-    //     storeInitials();
-    // }
-    
 }
-
-// I want to go to the next question once an answer is selected
-// function nextQuestion(e){
-//     h2.classList.add('hide')
-//     var selectedAnswer = e.target
-//     // if there are still questions available, go to next question
-//     if (shuffledQuestions.length > currentQuestionIndex +1){
-//         selectedAnswer.addEventListener('click', function() {
-//             currentQuestionIndex++;
-//             setNextQuestion();
-//         })
-//     }
-// }
-
-// I want to append 'correct' or 'wrong' on screen
-// function setStatusClass(element, correct){
-//     // clearStatusClass(element)
-//     if (correct) {
-//         element.classList.add('correct')
-//         console.log("check element classlist correct")
-//     }else{
-//         element.classList.add('wrong')
-//         console.log("check element classlist wrong")
-//     }
-// }
-
-// function clearStatusClass(element){
-//     element.classList.remove('correct')
-//     element.classList.remove('wrong')
-// }
