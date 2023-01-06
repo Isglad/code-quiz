@@ -260,11 +260,14 @@ function resetState(){
 
 // function that populates answer
 function selectAnswer(e){
+    console.log("Check wrong or correct answer starts here!")
     var selectedBtn = e.target
     var correct = selectedBtn.dataset.correct
     setStatusClass(document.body, correct)
+    console.log("check setStatus " + document.body)
     Array.from(answerButtonsElement.children).forEach(button => {
         setStatusClass(button, button.dataset.correct)
+        console.log("button check " + button.dataset.correct)
     })
     if (shuffledQuestions.length > currentQuestionIndex +1){
         // nextButton.classList.remove('hide')
@@ -278,8 +281,10 @@ function setStatusClass(element, correct){
     clearStatusClass(element)
     if (correct) {
         element.classList.add('correct')
+        console.log("check element classlist correct")
     }else{
         element.classList.add('wrong')
+        console.log("check element classlist wrong")
     }
 }
 
